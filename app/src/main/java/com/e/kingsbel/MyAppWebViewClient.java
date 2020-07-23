@@ -7,16 +7,14 @@ import android.webkit.WebViewClient;
 
 public class MyAppWebViewClient extends WebViewClient {
 
-    // handling external links as intents
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-        if( Uri.parse(url).getHost().endsWith("https://www.kingsbel.com/") ) {
+        if ("https://www.kingsbel.com/".equals(Uri.parse(url).getHost())) {
             return false;
         }
 
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        view.getContext().startActivity(intent);
+        startActivity(intent);
         return true;
     }
 }
