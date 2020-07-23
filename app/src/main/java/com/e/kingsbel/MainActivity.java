@@ -7,22 +7,28 @@ import android.webkit.WebView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private WebView webView;
+    private WebView myWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        webView = (WebView) findViewById(R.id.homeWebView);
-        webView.loadUrl("https://www.kingsbel.com/store");
-        webView.setWebViewClient(new MyAppWebViewClient());
+        myWebView = (WebView) findViewById(R.id.homeWebView);
+        setContentView(myWebView);
+        myWebView.loadUrl("https://www.kingsbel.com/store");
+
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        MyAppWebViewClient webViewClient = new MyAppWebViewClient();
+
+        myWebView.setWebViewClient(webViewClient);
     }
     // handling back button
     @Override
     public void onBackPressed() {
-        if(webView.canGoBack()) {
-            webView.goBack();
+        if(myWebView.canGoBack()) {
+            myWebView.goBack();
         } else {
             super.onBackPressed();
         }
